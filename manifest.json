@@ -1,7 +1,7 @@
 {
     "name": "So Many Tabs",
     "version": "0.1.0",
-    "description": "Too many tabs? Can't find anything? Replace your new tab page with a grid of tabs, with image previews! Now you can add even more tabs!",
+    "description": "Too many tabs? Can't find anything? Replace the new tab page with a grid of images! Now you can add even more tabs!",
     "homepage_url": "https://quentinbrooks.com",
     "manifest_version": 3,
     "icons": {
