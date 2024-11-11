@@ -1,0 +1,55 @@
+{
+    "name": "So Many Tabs",
+    "version": "0.1.0",
+    "description": "Too many tabs? Can't find anything? Replace your new tab page with a grid of tabs, with image previews! Now you can add even more tabs!",
+    "homepage_url": "https://quentinbrooks.com",
+    "manifest_version": 3,
+    "icons": {
+        "16": "icon16.png",
+        "32": "icon32.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "action": {
+        "default_title": "Save (Ctrl+m to save the link under the mouse cursor / current page)"
+    },
+    "background": {
+        "service_worker": "./extMain.js",
+        "type": "module",
+        "persistent": true
+    },
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "scripting",
+        "tabCapture",
+        "storage",
+        "unlimitedStorage"
+    ],
+    "chrome_url_overrides": {
+        "newtab": "./newtab.html"
+    },
+    "commands": {
+        "save-hover-link": {
+            "suggested_key": {
+                "default": "Ctrl+M"
+            },
+            "description": "Save the link under the mouse cursor. If nothing is under the link, saves the current page. (5)"
+        },
+        "unsave": {
+            "suggested_key": {
+                "default": "Ctrl+Q"
+            },
+            "description": "Unsave the current tab (and go to the next tab) (7)"
+        },
+        "dismiss-and-goto-next": {
+            "suggested_key": {
+                "default": "Ctrl+Period"
+            },
+            "description": "Dismiss the current tab and go to the next saved tab (3)"
+        }
+    }
+}

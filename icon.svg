@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" viewBox="0 0 800 800">
+  <defs>
+    <g id="pyramid">
+      <polygon points="0, 0  -90, -51.96152422706631   90, -51.96152422706631" fill="#4a86e8" stroke="#4a86e8" stroke-width="0.5" />
+      <polygon points="0, 0  90, -51.96152422706631   0, 103.92304845413263" fill="#7aa9f5" stroke="#7aa9f5" stroke-width="0.5" />
+      <polygon points="0, 0  0, 103.92304845413263   -90, -51.96152422706631" fill="#1c4587" stroke="#1c4587" stroke-width="0.5" />
+    </g>
+  </defs>
+  <use href="#pyramid" transform="translate(225, 110.54117647058824) rotate(60)" />
+  <use href="#pyramid" transform="translate(135, 214.2) rotate(120)" />
+  <use href="#pyramid" transform="translate(225, 267.1411764705882) rotate(180)" />
+  <use href="#pyramid" transform="translate(135, 370.8) rotate(240)" />
+  <use href="#pyramid" transform="translate(225, 423.74117647058824) rotate(300)" />
+  <use href="#pyramid" transform="translate(135, 527.4) rotate(360)" />
+  <use href="#pyramid" transform="translate(225, 580.3411764705883) rotate(420)" />
+  <use href="#pyramid" transform="translate(135, 684) rotate(480)" />
+  <use href="#pyramid" transform="translate(225, 736.9411764705883) rotate(540)" />
+  <use href="#pyramid" transform="translate(405, 110.54117647058824) rotate(60)" />
+  <use href="#pyramid" transform="translate(315, 214.2) rotate(120)" />
+  <use href="#pyramid" transform="translate(405, 267.1411764705882) rotate(180)" />
+  <use href="#pyramid" transform="translate(315, 370.8) rotate(240)" />
+  <use href="#pyramid" transform="translate(405, 423.74117647058824) rotate(300)" />
+  <use href="#pyramid" transform="translate(315, 527.4) rotate(360)" />
+  <use href="#pyramid" transform="translate(405, 580.3411764705883) rotate(420)" />
+  <use href="#pyramid" transform="translate(315, 684) rotate(480)" />
+  <use href="#pyramid" transform="translate(405, 736.9411764705883) rotate(540)" />
+  <use href="#pyramid" transform="translate(585, 110.54117647058824) rotate(60)" />
+  <use href="#pyramid" transform="translate(495, 214.2) rotate(120)" />
+  <use href="#pyramid" transform="translate(585, 267.1411764705882) rotate(180)" />
+  <use href="#pyramid" transform="translate(495, 370.8) rotate(240)" />
+  <use href="#pyramid" transform="translate(585, 423.74117647058824) rotate(300)" />
+  <use href="#pyramid" transform="translate(495, 527.4) rotate(360)" />
+  <use href="#pyramid" transform="translate(585, 580.3411764705883) rotate(420)" />
+  <use href="#pyramid" transform="translate(495, 684) rotate(480)" />
+  <use href="#pyramid" transform="translate(585, 736.9411764705883) rotate(540)" />
+  <use href="#pyramid" transform="translate(675, 214.2) rotate(120)" />
+  <use href="#pyramid" transform="translate(675, 370.8) rotate(240)" />
+  <use href="#pyramid" transform="translate(675, 527.4) rotate(360)" />
+  <use href="#pyramid" transform="translate(675, 684) rotate(480)" />
+</svg>
+<!-- ALSO hardcoded in TabState.tsx, so we can set the icon. -->
+<!-- {(() => {
+      let aX = -0.5;
+      let aY = -Math.sqrt(3) / 6;
+
+      let bX = 0.5;
+      let bY = -Math.sqrt(3) / 6;
+
+      let cX = 0;
+      let cY = Math.sqrt(3) / 3;
+
+      let centerX = (aX + bX + cX) / 3;
+      let centerY = (aY + bY + cY) / 3;
+
+      let scale = 180;
+      aX *= scale;
+      aY *= scale;
+      bX *= scale;
+      bY *= scale;
+      cX *= scale;
+      cY *= scale;
+      centerX *= scale;
+      centerY *= scale;
+
+      let colors = [
+          "#4a86e8",
+          "#7aa9f5",
+          "#1c4587",
+      ];
+
+      return (
+          <div className={css.border("1px solid white")}>
+              <svg xmlns="http://www.w3.org/2000/svg" width={600} viewBox="0 0 800 800">
+                  <defs>
+                      <g id="pyramid">
+                          <polygon points={`${centerX}, ${centerY}  ${aX}, ${aY}   ${bX}, ${bY}`} fill={colors[0]} stroke={colors[0]} stroke-width={0.5} />
+                          <polygon points={`${centerX}, ${centerY}  ${bX}, ${bY}   ${cX}, ${cY}`} fill={colors[1]} stroke={colors[1]} stroke-width={0.5} />
+                          <polygon points={`${centerX}, ${centerY}  ${cX}, ${cY}   ${aX}, ${aY}`} fill={colors[2]} stroke={colors[2]} stroke-width={0.5} />
+
+                      </g>
+                  </defs>
+                  {(() => {
+                      let lines: preact.ComponentChild[] = [];
+                      let rowCount = 4;
+                      for (let x = 0; x < rowCount; x++) {
+                          for (let y = 1; y < 10; y++) {
+                              let angle = y * 60;
+                              let xCur = x * scale + scale * 0.75;
+                              let yCur = Math.floor(y / 2) * scale * 0.87 + scale * 0.32;
+                              if (y % 2 === 1) {
+                                  xCur += scale / 2;
+                              }
+                              if (y % 2 === 1) {
+                                  yCur += scale / 3.4;
+                              }
+                              if (y % 2 === 1 && x === rowCount - 1) continue;
+                              lines.push(<use href="#pyramid" transform={`translate(${xCur}, ${yCur}) rotate(${angle})`}
+                              />);
+                          }
+                      }
+                      return lines;
+                  })()}
+              </svg>
+          </div>
+      );
+  })()} -->
