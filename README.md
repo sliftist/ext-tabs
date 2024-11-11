@@ -20,4 +20,4 @@ Then load in Chrome:
 
 Run `yarn watch` to automatically rebuild when source files change.
 
-Any pull requests (especially design related) are very much encouraged. I recommend starting by reading `Layout.tsx` and `TabPage.tsx`. Backend data and the service worker is managed by `TabState.tsx`.
+Any pull requests (especially design related) are very much encouraged! I recommend starting by reading `Layout.tsx` and `TabPage.tsx`. Backend data and the service worker is managed by `TabState.tsx`.
