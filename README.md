@@ -1,4 +1,4 @@
-# Tab Grid Extension
+# So Many Tabs
 
 Shows your tabs in a grid on the new tab page. Includes thumbnails of each tab and keyboard shortcuts for saving tabs.
 
