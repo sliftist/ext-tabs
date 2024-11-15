@@ -16,18 +16,16 @@ if (isInBrowser()) {
 if (isInBrowser()) {
     console.log("Loading");
 
-    /*
+    // NOTE: This run in production, which causes to try to connect to a random websocket. HOWEVER,
+    //  1, we don't do anything with it (if it fails, etc, it won't break anything, and 2, it is no
+    //  less harmless than any of the dozens of blocked tracking requests. Failed requests are FAST.
     const socket = new WebSocket("ws://localhost:8080");
 
     socket.onmessage = function (event) {
         if (event.data === "Build completed successfully") {
             location.reload();
-        } else {
-            console.log(event.data);
         }
     };
-    */
-
 
     document.body.innerHTML = "";
     preact.render(<Layout />, document.body);
