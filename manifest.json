@@ -2,7 +2,7 @@
     "name": "So Many Tabs",
     "version": "0.2.0",
     "description": "Too many tabs? Can't find anything? Replace the new tab page with a grid of images! Now you can add even more tabs!",
-    "homepage_url": "https://quentinbrooks.com",
+    "homepage_url": "https://github.com/sliftist/ext-tabs",
     "manifest_version": 3,
     "icons": {
         "16": "icon16.png",

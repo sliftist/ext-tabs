@@ -1,6 +1,4 @@
 {
-    // Quentin: DON'T commit { debug.node.autoAttach: "on" }. This setting (while useful), has serious performance ramifications.
-    // "debug.node.autoAttach": "on",
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
