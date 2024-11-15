@@ -16,6 +16,7 @@ if (isInBrowser()) {
 if (isInBrowser()) {
     console.log("Loading");
 
+    /*
     const socket = new WebSocket("ws://localhost:8080");
 
     socket.onmessage = function (event) {
@@ -25,6 +26,7 @@ if (isInBrowser()) {
             console.log(event.data);
         }
     };
+    */
 
 
     document.body.innerHTML = "";
