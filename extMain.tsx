@@ -14,8 +14,6 @@ if (isInBrowser()) {
 }
 
 if (isInBrowser()) {
-    console.log("Loading");
-
     // NOTE: This run in production, which causes to try to connect to a random websocket. HOWEVER,
     //  1, we don't do anything with it (if it fails, etc, it won't break anything, and 2, it is no
     //  less harmless than any of the dozens of blocked tracking requests. Failed requests are FAST.
