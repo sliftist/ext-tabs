@@ -16,8 +16,8 @@ export class Layout extends preact.Component {
         let allTabs = TabState.rawTabs;
         let hiddenTabs = allTabs.filter(x => isHidden(x.url));
         let visibleTabs = allTabs.filter(x => !isHidden(x.url));
-        let realTabs = visibleTabs.filter(x => !x.saved);
-        let saved = visibleTabs.filter(x => x.saved);
+        let realTabs = visibleTabs.filter(x => typeof x.id === "number");
+        let saved = visibleTabs.filter(x => typeof x.id !== "number");
 
         const TABS = [
             {

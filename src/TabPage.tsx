@@ -161,7 +161,7 @@ export class TabPage extends preact.Component<{
                                         .overflowWrap("break-word")
                                 }>{tab.title}</div>
                                 {(() => {
-                                    let saved = tab.saved || savedTabs.get(tab.url);
+                                    let saved = tab.saved;
                                     return (
                                         <div
                                             className={

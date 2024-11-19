@@ -22,7 +22,6 @@ if (isInServiceWorker()) {
 export interface TabInfo {
     id: number | string;
     windowId: number;
-    // Ex, saved
     saved?: boolean;
 
     url: string;
@@ -69,8 +68,8 @@ if (isInServiceWorker()) {
             Object.assign(TabState, newTabState);
 
             for (let tab of TabState.rawTabs) {
-                if (tab.saved) {
-                    savedTabs.set(tab.id + "", tab);
+                if (typeof tab.id === "string") {
+                    savedTabs.set(tab.id, tab);
                 }
             }
             for (let [id, value] of Object.values(TabState.screenshots)) {
@@ -187,13 +186,13 @@ async function evalInTab<T>(tabId: number, fnc: () => T): Promise<T | undefined>
 async function goToTopSaved() {
     let curTab = await getCurrentTab();
     if (!curTab?.id) return;
-    let tabs = TabState.rawTabs.filter(x => x.saved);
+    let tabs = TabState.rawTabs.filter(x => typeof x.id === "string");
     dismissed.setup();
     await dismissed.initialLoad;
     sortTabs(tabs);
     let tab = tabs[0];
     if (!tab) return;
-    let open = TabState.rawTabs.find(x => !x.saved && x.url === tab.url);
+    let open = TabState.rawTabs.find(x => typeof x.id === "number" && x.url === tab.url);
     // UNLESS the current tab is the top saved, then just update it, no need to close it
     if (open && curTab.url !== tab.url) {
         // Close current tab, and move to the existing tab
@@ -215,7 +214,7 @@ if (isInServiceWorker()) {
             if (!tabId) return;
             let savedTab = tab && savedTabs.get(tab.url || "");
             if (tab && tab.url && savedTab) {
-                let tabs = TabState.rawTabs.filter(x => x.saved);
+                let tabs = TabState.rawTabs.filter(x => typeof x.id === "string");
                 sortTabs(tabs);
                 if (tabs[0]?.url !== tab.url) {
                     dismissed.delete(tab.url);
@@ -323,7 +322,7 @@ async function ensureIconStateCorrect() {
             let newState: IconState = "normal";
             if (savedTabs.get(tab?.url || "")) {
                 sortTabs(TabState.rawTabs);
-                let saved = TabState.rawTabs.filter(x => x.saved);
+                let saved = TabState.rawTabs.filter(x => typeof x.id === "string");
                 if (saved[0]?.url === tab?.url) {
                     newState = "save";
                     console.log(`Setting icon to save`);
@@ -617,6 +616,9 @@ const baseUpdateTabs = throttleFunction(100, async function baseUpdateTabs() {
             discarded: tab.discarded,
             playingAudio: !!tab.audible,
         }));
+        for (let tab of rawTabs) {
+            tab.saved = !!await savedTabs.get(tab.url);
+        }
         let titleLookup = new Map(rawTabs.map(tab => [tab.url, tab.title]));
         for (let tab of savedTabs.getValues()) {
             let newTitle = titleLookup.get(tab.url);
