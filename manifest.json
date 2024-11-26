@@ -1,6 +1,6 @@
 {
     "name": "So Many Tabs",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "Too many tabs? Can't find anything? Replace the new tab page with a grid of images! Now you can add even more tabs!",
     "homepage_url": "https://github.com/sliftist/ext-tabs",
     "manifest_version": 3,

@@ -212,23 +212,6 @@ if (isInServiceWorker()) {
             let tab = await getCurrentTab();
             let tabId = tab?.id;
             if (!tabId) return;
-            let savedTab = tab && savedTabs.get(tab.url || "");
-            if (tab && tab.url && savedTab) {
-                let tabs = TabState.rawTabs.filter(x => typeof x.id === "string");
-                sortTabs(tabs);
-                if (tabs[0]?.url !== tab.url) {
-                    dismissed.delete(tab.url);
-                    savedTab.lastAccessed = Date.now();
-                    savedTabs.set(tab.url || "", savedTab);
-                    console.log(`Updated lastAccessed for ${tab.url}`);
-                } else {
-                    dismissed.set(tab.url || "", -Date.now());
-                    console.log(`Dismissed ${tab.url}`);
-                }
-                await ensureIconStateCorrect();
-                triggerUpdate();
-                return;
-            }
             let result = await evalInTab(tabId, () => {
                 let link = document.querySelector("a:hover") as HTMLAnchorElement | null;
                 if (!link) return undefined;
@@ -245,8 +228,27 @@ if (isInServiceWorker()) {
                 noFlash = true;
             }
             let { url, title } = result;
-            console.log("Hotkey found", { result });
             if (!url) return;
+
+            // If it's already saved, either more it to the end, or the beginning of the queue
+            let savedTab = savedTabs.get(url || "");
+            if (url && savedTab) {
+                let tabs = TabState.rawTabs.filter(x => typeof x.id === "string");
+                sortTabs(tabs);
+                if (tabs[0]?.url !== url) {
+                    dismissed.delete(url);
+                    savedTab.lastAccessed = Date.now();
+                    savedTabs.set(url || "", savedTab);
+                    console.log(`Updated lastAccessed for ${url}`);
+                } else {
+                    dismissed.set(url || "", -Date.now());
+                    console.log(`Dismissed ${url}`);
+                }
+                await ensureIconStateCorrect();
+                triggerUpdate();
+                return;
+            }
+
             await saveTabsBase([
                 {
                     id: url,
