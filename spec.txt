@@ -1,0 +1,155 @@
+Hotkeys for all pages, so we can easily view the stack (instead of open)
+
+Instead of dismissing to the end of the queue, move back N (maybe 10?) videos?
+
+BUG: chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => 
+    IS NOT returning sometimes? This causes the icon state to be wrong.
+    - It stays in this state, even after refreshes, until I click the icon
+    - The extension is running, as I can break into before the call occurs.
+
+
+SUGGESTION PAGE VIA HOTKEY
+    (Should make scouring faster, as while it is more steps, it allows you to quickly view and skip many entries. AND, it allows us to stick in long form content, without having to skip it, which can let us ruminate on it, and then watch the next time we see it, when we have time.)
+    - First, visit our .html page directly, and use routing so we can hit a specific page
+    - On pressing a hotkey, go to a suggestion page, which had ~6 from the top of the stack, in a grid, with previews
+    - Hotkeys (numbers?) to pick which one to visit
+    - ALSO, a hotkey to discard all of them
+    - PLUS, buttons to easily dismiss individual ones, or to remove them
+        - Shift+hotkey to discard, alt+hotkey to remove?
+        - On removing  an individual one, replace it in the same position, so they don't all shift (temporarily, when we refresh it will go back to normal order)
+    - ALSO, show some pinned groups, where the hotkey drills into them?
+        - Preview with the top of the stack on that group
+        - This way it encourages us to watch long form content (or whatever content we want group / pin)
+ALSO, on the suggestion page, allow resorting the to watch videos (moving them to the top, moving to a specific location, moving down 20, moving to the bottom, etc, etc)
+    - Next we'll tag/group, so we can sort of different moods
+
+1) Groups
+    - Create group
+    - Lazily load groups when we open the respective page
+    - Each group shows up in the sidebar
+    - Group config (on group page)
+        - name
+        - if adding to group also saves (true by default)
+        - hotkey LETTER (must be unique)
+            - Show uppercase
+    - Show hotkey letter prominently
+        - If not in select mode, opens group
+        - If in select mode, adds to that group
+    - MAKE LIKED a default group, with hotkey "L"
+
+3) Ability to like channels
+
+2) Automatic groups
+    - Video from liked channel
+    - Long form video (> 50 minutes long)
+    - Medium form (> 15 minutes long)
+    - Average (> 3 minutes long)
+    - Short (< 3 minutes long)
+3) A way to mark videos as liked / high quality easily?
+
+External group management
+    - ALLOW pages to create groups and add to them (their groups will be namespaced, and the user will have to approve the domain request to create groups)
+        - This way our video viewer can create a group with new videos
+
+Have the video viewer register some video groups
+    - update in the indexer. I guess just always bulk update, because this shouldn't be the slowest part anyways (the slowest part is getting all file timestamps)
+        - Add deduping to the chrome.local storage wrapper, so we don't write identical values, so bulk updating is fine
+    - groups
+        - overview (movies + special tv series season grouped)
+        - movies
+        - tv series
+        - all files
+
+5) Search / filter on each page
+
+5.1) omnibox filtering!
+    - We can register a keyword for search (maybe just "t"? So then it's ctrl+t, t)
+    - Add our results as suggestions in the omni box, with our preview as an icon
+    - Allow configuration to make it search other groups (movies)
+5.2) Advanced omnibox filtering
+    - With another keyword, try showing no suggestions, so the suggest box is really small
+    - Then tell the new tab page (or open one, if there isn't one)
+    - Then filter, from all tabs, [...unsaved, ...saved], using a "search" page (which will always be allowed)
+    - Then... maybe just show a single suggestion? That way we can open a page without having to click
+    
+Some way to move something 20 entries into the stack, instead of the end
+    - Maybe only via suggestions page (as we can have more hotkeys there)
+
+
+6) Import/export saved tabs / history
+    - Once we get enough... we're going to want to save it
+
+
+7) Custom search results for other apps
+    - We want indexed movies to be available (with icons) in omnibar search
+    - I THINK we can receive messages from pages, and use this to add to a search index
+    - If we could use this to 
+
+
+6) Store more data in TabInfo
+    - Channel, video length, channel icon
+    - We SHOULD be able to get this from youtube... easily?
+    - Show this data in the UI, so it looks more like the youtube homepage
+
+
+7.1) Configuration page
+    - Grid size
+    - Default preview aspect ratio
+    - Max default tabs in grid
+    - Title pixel height
+    - Default page
+    - Preview image priority (screenshot vs og:image)
+    - Change poll frequency
+    - Change update triggers
+    - Disable screenshotting
+    - Disable "og:image" parsing
+    - Cache screenshot once per URL (we need to add this functionality, but it should be easy enough)
+    - Alt thumbnail
+        3.jpg instead, which will use a frame from the video instead
+
+
+10) Capture play progress of youtube / etc, and show on item
+
+Maybe ideas
+
+8) Store likes
+    - Saving counts as liking
+    - Detect youtube likes
+    - Allow liking any page, via a button in the extension popup
+        - And show if a page is liked
+        - Also, add a hotkey
+            - We want it to also like on the actual site
+    - Add a page to view historic likes
+8.1) Hotkey on mouse over of links, to add link to saved
+    - We can get the preview by fetching
+9) Like aggregation
+    - Category => creator => liked videos
+10) ALSO, use an api / scrapping to get more videos by a creator, and show this beside liked videos,
+    so you can basically have a video feed!
+
+12) History view
+    - See if we can get a history of tabs, primarily so we can assign likes retroactively.
+
+11) Creator scour
+    - List of unspecified creators
+    - If you like them, they stay in the list (but go to the end)
+    - If you discard them, they are removed from the list
+    - If you drill down, you see liked videos by that creator, as well as other videos by that creator
+
+12) Recommended creators / videos
+    - Using liked creators, find other creators you might like, and their videos you might like best
+
+10) Video summarizer (maybe using annotations and ai)
+    - For grouping
+    - For suggestions
+        - Ex, "I want to watch something light, involving tech"
+            - I want to watch something educational  
+
+11) Inject saved icons into UI (youtube, etc)
+    - Option to hide saved items, so we can get more suggestions
+
+
+Allow google drive api to replace chrome.storage.local
+    - With batching we can make 10K updates per 100 seconds (so... 100 per second)
+    - Optional, and once the user allows it, move the data over
+        - Unless that collection is already there... then just use that data, and if the user turns off google drive integration they will get their old data.

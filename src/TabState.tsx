@@ -346,6 +346,17 @@ if (isInServiceWorker()) {
     chrome.tabs.onUpdated.addListener(ensureIconStateCorrect);
     chrome.tabs.onRemoved.addListener(ensureIconStateCorrect);
     chrome.windows.onFocusChanged.addListener(ensureIconStateCorrect);
+
+    // Periodically check icon state in case we miss any changes
+    void chrome.alarms.create("ensureIconStateCorrect", {
+        periodInMinutes: 1
+    });
+
+    chrome.alarms.onAlarm.addListener(alarm => {
+        if (alarm.name === "ensureIconStateCorrect") {
+            void ensureIconStateCorrect();
+        }
+    });
 }
 
 export function unsaveTabsPromise(tabIds: (number | string)[]) {
